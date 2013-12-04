@@ -1,0 +1,8 @@
+http://pmg.org.ru/basic3d/math.htm
+http://www.gamedev.ru/code/articles/faq_matrix_quat
+
+http://ru.wikipedia.org/wiki/Тригонометрические_функции
+http://ru.wikipedia.org/wiki/Матрица_поворота
+
+http://www.youtube.com/user/thebennybox?feature=watch
+http://www.youtube.com/user/BSVino?feature=watch
