@@ -6,17 +6,17 @@ public class Vector3d {
 
     public static Vector3d ZERO = new Vector3d(Point3d.ZERO);
 
-    public static Vector3d I = new Vector3d(1, 0, 0);
-    public static Vector3d J = new Vector3d(0, 1, 0);
-    public static Vector3d K = new Vector3d(0, 0, 1);
+    public final static Vector3d I = new Vector3d(1, 0, 0);
+    public final static Vector3d J = new Vector3d(0, 1, 0);
+    public final static Vector3d K = new Vector3d(0, 0, 1);
 
-    public static Vector3d IJK = new Vector3d(1, 1, 1);
+    public final static Vector3d IJK = new Vector3d(1, 1, 1);
 
-    private double x;
+    private final double x;
 
-    private double y;
+    private final double y;
 
-    private double z;
+    private final double z;
 
     public double getX() {
         return x;
