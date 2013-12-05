@@ -6,3 +6,5 @@ http://ru.wikipedia.org/wiki/Матрица_поворота
 
 http://www.youtube.com/user/thebennybox?feature=watch
 http://www.youtube.com/user/BSVino?feature=watch
+
+http://www.lwjgl.org/wiki/index.php?title=Main_Page

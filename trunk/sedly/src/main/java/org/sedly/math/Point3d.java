@@ -6,11 +6,11 @@ public class Point3d {
 
     public final static Point3d ZERO = new Point3d(0, 0, 0);
 
-    private double x;
+    private final double x;
 
-    private double y;
+    private final double y;
 
-    private double z;
+    private final double z;
 
     public double getX() {
         return x;
