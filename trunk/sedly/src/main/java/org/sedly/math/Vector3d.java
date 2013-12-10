@@ -4,19 +4,15 @@ import java.text.MessageFormat;
 
 public class Vector3d {
 
-    public static Vector3d ZERO = new Vector3d(Point3d.ZERO);
+    public final static Vector3d ZERO = new Vector3d(0, 0, 0);
 
-    public final static Vector3d I = new Vector3d(1, 0, 0);
-    public final static Vector3d J = new Vector3d(0, 1, 0);
-    public final static Vector3d K = new Vector3d(0, 0, 1);
+    public final static Vector3d UNIT = new Vector3d(1, 1, 1);
 
-    public final static Vector3d IJK = new Vector3d(1, 1, 1);
+    public final static Vector3d UNIT_X = new Vector3d(1, 0, 0);
+    public final static Vector3d UNIT_Y = new Vector3d(0, 1, 0);
+    public final static Vector3d UNIT_Z = new Vector3d(0, 0, 1);
 
-    private final double x;
-
-    private final double y;
-
-    private final double z;
+    private final double x, y, z;
 
     public double getX() {
         return x;
@@ -38,10 +34,6 @@ public class Vector3d {
 
     public Vector3d(Vector3d v) {
         this(v.x, v.y, v.z);
-    }
-
-    public Vector3d(Point3d v) {
-        this(v.getX(), v.getY(), v.getZ());
     }
 
     public static Vector3d add(Vector3d v1, Vector3d v2) {
