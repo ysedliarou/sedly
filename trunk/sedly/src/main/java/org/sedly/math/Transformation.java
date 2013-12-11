@@ -2,12 +2,12 @@ package org.sedly.math;
 
 public class Transformation {
 
-    private Vector3d translation;
+    private Vector3f translation;
 
-    private Vector3d scale;
+    private Vector3f scale;
 
-    public static Matrix4d translation(Vector3d v) {
-        return new Matrix4d(new double[][] {
+    public static Matrix4f translation(Vector3f v) {
+        return new Matrix4f(new float[][] {
                 {1,         0,          0,          v.getX()},
                 {0,         1,          0,          v.getY()},
                 {0,         0,          1,          v.getZ()},
@@ -15,12 +15,12 @@ public class Transformation {
         });
     }
 
-    public Matrix4d translation() {
+    public Matrix4f translation() {
         return translation(translation);
     }
 
-    public static Matrix4d scale(Vector3d v) {
-        return new Matrix4d(new double[][] {
+    public static Matrix4f scale(Vector3f v) {
+        return new Matrix4f(new float[][] {
                 {v.getX(),  0,          0,          0},
                 {0,         v.getY(),   0,          0},
                 {0,         0,          v.getZ(),   0},
@@ -28,13 +28,13 @@ public class Transformation {
         });
     }
 
-    public Matrix4d scale() {
+    public Matrix4f scale() {
         return scale(scale);
     }
 
-    public static Matrix4d rotationX(double alpha) {
-        final double cos = Math.cos(alpha), sin = Math.sin(alpha);
-        return new Matrix4d(new double[][] {
+    public static Matrix4f rotationX(float alpha) {
+        final float cos = (float) Math.cos(alpha), sin = (float) Math.sin(alpha);
+        return new Matrix4f(new float[][] {
                 {1,         0,          0,          0},
                 {0,         cos,        -sin,       0},
                 {0,         sin,        cos,        0},
@@ -42,9 +42,9 @@ public class Transformation {
         });
     }
 
-    public static Matrix4d rotationY(double beta) {
-        final double cos = Math.cos(beta), sin = Math.sin(beta);
-        return new Matrix4d(new double[][] {
+    public static Matrix4f rotationY(float beta) {
+        final float cos = (float) Math.cos(beta), sin = (float) Math.sin(beta);
+        return new Matrix4f(new float[][] {
                 {cos,       0,          sin,        0},
                 {0,         1,          0,          0},
                 {-sin,      0,          cos,        0},
@@ -52,14 +52,18 @@ public class Transformation {
         });
     }
 
-    public static Matrix4d rotationZ(double gamma) {
-        final double cos = Math.cos(gamma), sin = Math.sin(gamma);
-        return new Matrix4d(new double[][] {
+    public static Matrix4f rotationZ(float gamma) {
+        final float cos = (float) Math.cos(gamma), sin = (float) Math.sin(gamma);
+        return new Matrix4f(new float[][] {
                 {cos,       -sin,       0,          0},
                 {sin,       cos,        0,          0},
                 {0,         0,          1,          0},
                 {0,         0,          0,          1}
         });
+    }
+
+    public static Matrix4f rotationXYZ(float theta) {
+        return rotationZ(theta).mul(rotationY(theta).mul(rotationX(theta)));
     }
 
 }
