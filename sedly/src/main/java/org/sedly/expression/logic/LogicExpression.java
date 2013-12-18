@@ -11,12 +11,12 @@ public abstract class LogicExpression extends AbstractExpression<Boolean, Boolea
 
     @Override
     protected Boolean evaluateLeftValue() {
-        return (Boolean) getLeftExpression().evaluate();
+        return getLeftExpression().evaluate();
     }
 
     @Override
     protected Boolean evaluateRightValue() {
-        return (Boolean) getRightExpression().evaluate();
+        return getRightExpression().evaluate();
     }
 
 }

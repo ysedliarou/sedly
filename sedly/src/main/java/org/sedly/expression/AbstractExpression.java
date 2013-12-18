@@ -2,19 +2,19 @@ package org.sedly.expression;
 
 public abstract class AbstractExpression<R, V> implements Expression<R> {
 
-    private Expression<?> leftExpression;
+    private Expression<V> leftExpression;
 
-    private Expression<?> rightExpression;
+    private Expression<V> rightExpression;
 
-    public Expression<?> getLeftExpression() {
+    public Expression<V> getLeftExpression() {
         return leftExpression;
     }
 
-    public Expression<?> getRightExpression() {
+    public Expression<V> getRightExpression() {
         return rightExpression;
     }
 
-    protected AbstractExpression(Expression<?> leftExpression, Expression<?> rightExpression) {
+    protected AbstractExpression(Expression<V> leftExpression, Expression<V> rightExpression) {
         this.leftExpression = leftExpression;
         this.rightExpression = rightExpression;
     }
@@ -22,5 +22,8 @@ public abstract class AbstractExpression<R, V> implements Expression<R> {
     protected abstract V evaluateLeftValue();
 
     protected abstract V evaluateRightValue();
+
+    @Override
+    public abstract R evaluate();
 
 }
