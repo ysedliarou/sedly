@@ -11,12 +11,12 @@ public abstract class ConditionExpression extends AbstractExpression<Boolean, Do
 
     @Override
     protected Double evaluateLeftValue() {
-        return (Double) getLeftExpression().evaluate();
+        return getLeftExpression().evaluate();
     }
 
     @Override
     protected Double evaluateRightValue() {
-        return (Double) getRightExpression().evaluate();
+        return getRightExpression().evaluate();
     }
 
 }
