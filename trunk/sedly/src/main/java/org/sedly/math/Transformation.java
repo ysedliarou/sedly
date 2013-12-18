@@ -2,9 +2,17 @@ package org.sedly.math;
 
 public class Transformation {
 
-    private Vector3f translation;
+    private Vector3f translation = Vector3f.ZERO;
 
-    private Vector3f scale;
+    private Vector3f scale = Vector3f.UNIT;
+
+    public Vector3f getTranslation() {
+        return translation;
+    }
+
+    public Vector3f getScale() {
+        return scale;
+    }
 
     public static Matrix4f translation(Vector3f v) {
         return new Matrix4f(new float[][] {
