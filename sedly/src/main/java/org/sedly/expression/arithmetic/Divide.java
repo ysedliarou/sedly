@@ -1,5 +1,6 @@
 package org.sedly.expression.arithmetic;
 
+import org.sedly.expression.EvaluationException;
 import org.sedly.expression.Expression;
 
 public class Divide extends ArithmeticExpression {
@@ -10,7 +11,11 @@ public class Divide extends ArithmeticExpression {
 
     @Override
     public Double evaluate() {
-        return evaluateLeftValue() / evaluateRightValue();
+        Double right = evaluateRightValue();
+        if (right == 0) {
+            throw new EvaluationException("Division by zero;");
+        }
+        return evaluateLeftValue() / right;
     }
 
 }
