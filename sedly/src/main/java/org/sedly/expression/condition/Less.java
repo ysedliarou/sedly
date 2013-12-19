@@ -1,8 +1,9 @@
 package org.sedly.expression.condition;
 
 import org.sedly.expression.Expression;
+import org.sedly.expression.TwoOperandsExpression;
 
-public class Less extends ConditionExpression {
+public class Less extends TwoOperandsExpression<Boolean, Double> {
 
     public Less(Expression<Double> firstExpression, Expression<Double> secondExpression) {
         super(firstExpression, secondExpression);
@@ -10,7 +11,7 @@ public class Less extends ConditionExpression {
 
     @Override
     public Boolean evaluate() {
-        return evaluateLeftValue() < evaluateRightValue();
+        return evaluateFirstValue() < evaluateSecondValue();
     }
 
 }

@@ -1,9 +1,9 @@
 package org.sedly.expression.arithmetic;
 
-import org.sedly.expression.EvaluationException;
 import org.sedly.expression.Expression;
+import org.sedly.expression.TwoOperandsExpression;
 
-public class Divide extends ArithmeticExpression {
+public class Divide extends TwoOperandsExpression<Double, Double> {
 
     public Divide(Expression<Double> firstExpression, Expression<Double> secondExpression) {
         super(firstExpression, secondExpression);
@@ -11,11 +11,7 @@ public class Divide extends ArithmeticExpression {
 
     @Override
     public Double evaluate() {
-        Double right = evaluateRightValue();
-        if (right == 0) {
-            throw new EvaluationException("Division by zero;");
-        }
-        return evaluateLeftValue() / right;
+        return evaluateFirstValue() / evaluateSecondValue();
     }
 
 }

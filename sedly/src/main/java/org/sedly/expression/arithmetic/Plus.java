@@ -1,8 +1,9 @@
 package org.sedly.expression.arithmetic;
 
 import org.sedly.expression.Expression;
+import org.sedly.expression.TwoOperandsExpression;
 
-public class Plus extends ArithmeticExpression {
+public class Plus extends TwoOperandsExpression<Double, Double> {
 
     public Plus(Expression<Double> firstExpression, Expression<Double> secondExpression) {
         super(firstExpression, secondExpression);
@@ -10,7 +11,7 @@ public class Plus extends ArithmeticExpression {
 
     @Override
     public Double evaluate() {
-        return evaluateLeftValue() + evaluateRightValue();
+        return evaluateFirstValue() + evaluateSecondValue();
     }
 
 }
