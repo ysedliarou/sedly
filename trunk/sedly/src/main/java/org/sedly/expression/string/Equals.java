@@ -1,11 +1,11 @@
-package org.sedly.expression.condition;
+package org.sedly.expression.string;
 
-import org.sedly.expression.Expression;
 import org.sedly.expression.TwoOperandsExpression;
+import org.sedly.expression.Expression;
 
-public class Equals extends TwoOperandsExpression<Boolean, Double> {
+public class Equals extends TwoOperandsExpression<Boolean, String> {
 
-    public Equals(Expression<Double> firstExpression, Expression<Double> secondExpression) {
+    public Equals(Expression<String> firstExpression, Expression<String> secondExpression) {
         super(firstExpression, secondExpression);
     }
 
