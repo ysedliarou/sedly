@@ -10,7 +10,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import java.io.Serializable;
 import java.util.List;
 
-public class GenericDao<SD extends SearchData<T, ID>, T extends DomainObject<ID>, ID extends Serializable> extends HibernateDaoSupport
+public class GenericDao<SD extends SearchData, T extends DomainObject<ID>, ID extends Serializable> extends HibernateDaoSupport
         implements Dao<T, ID>, SearchDao<SD, T, ID> {
 
     private Class<T> daoClass;
