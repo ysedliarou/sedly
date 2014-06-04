@@ -1,9 +1,8 @@
 package org.gendao.dao.search.person;
 
 import org.gendao.dao.search.SearchData;
-import org.gendao.model.Person;
 
-public class PersonSearchData extends SearchData<Person, Integer> {
+public class PersonSearchData extends SearchData {
 
     private String name;
 

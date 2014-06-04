@@ -7,7 +7,7 @@ import org.hibernate.Session;
 
 import java.io.Serializable;
 
-public abstract class AbstractSearchStrategy<R, SD extends SearchData<T, ID>, T extends DomainObject<ID>, ID extends Serializable>
+public abstract class AbstractSearchStrategy<R, SD extends SearchData, T extends DomainObject<ID>, ID extends Serializable>
         implements SearchStrategy<R, SD, T, ID> {
 
     @Override
