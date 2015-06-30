@@ -1,18 +1,11 @@
 package org.sedly.math;
 
+
 public class Matrix4f {
 
     private static abstract class Operation {
 
-        private float[][] source, target;
-
-        protected float[][] getSource() {
-            return source;
-        }
-
-        protected float[][] getTarget() {
-            return target;
-        }
+        float[][] source, target;
 
         Operation(float[][] source, float[][] target) {
             this.source = source;
@@ -22,44 +15,61 @@ public class Matrix4f {
         abstract float operate(int i, int j);
     }
 
+    // --------------- CONSTANTS ---------------
+
     public final static int SIZE = 4;
 
-    public static Matrix4f IDENTITY = new Matrix4f(new float[][] {
+    public final static Matrix4f IDENTITY = new Matrix4f(new float[][] {
                 {1,         0,          0,          0},
                 {0,         1,          0,          0},
                 {0,         0,          1,          0},
                 {0,         0,          0,          1}
     });
 
-    private float matrix[][] = new float[SIZE][SIZE];
+    // --------------- PROPERTIES ---------------
+
+    private final float matrix[][];
+
+    // --------------- GETTERS ---------------
 
     public float[][] getMatrix() {
-        return copy(new Operation(matrix, null) {
-            @Override
-            float operate(int i, int j) {
-                return getSource()[i][j];
-            }
-        });
+        return fill(createGetOperation(matrix));
     }
 
-    public float get(int i, int j) {
-        return matrix[i][j];
-    }
+    // --------------- CONSTRUCTORS ---------------
 
     public Matrix4f(float[][] matrix) {
-        this(new Operation(matrix, null) {
-            @Override
-            float operate(int i, int j) {
-                return getSource()[i][j];
-            }
-        });
+        this(createGetOperation(matrix));
+    }
+
+    public Matrix4f() {
+        this(IDENTITY);
+    }
+
+    public Matrix4f(Matrix4f m) {
+        this(m.matrix);
     }
 
     private Matrix4f(Operation operation) {
-        this.matrix = copy(operation);
+        this.matrix = fill(operation);
     }
 
-    private static float[][] copy(Operation operation) {
+    // --------------- METHODS ---------------
+
+    private static Operation createGetOperation(float[][] matrix) {
+        return new Operation(matrix, null) {
+            @Override
+            float operate(int i, int j) {
+                return this.source[i][j];
+            }
+        };
+    }
+
+    public float get(int i, int j) {
+        return createGetOperation(this.matrix).operate(i, j);
+    }
+
+    private static float[][] fill(Operation operation) {
         float[][] target = new float[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
@@ -69,15 +79,15 @@ public class Matrix4f {
         return target;
     }
 
-    public Matrix4f copy() {
-        return new Matrix4f(matrix);
+    public Matrix4f duplicate() {
+        return new Matrix4f(this);
     }
 
     public static Matrix4f mul(Matrix4f m, final float a) {
         return new Matrix4f(new Operation(m.matrix, null) {
             @Override
             float operate(int i, int j) {
-                return getSource()[i][j] * a;
+                return this.source[i][j] * a;
             }
         });
     }
@@ -90,7 +100,7 @@ public class Matrix4f {
         return new Matrix4f(new Operation(m.matrix, null) {
             @Override
             float operate(int i, int j) {
-                return getSource()[i][j] / a;
+                return this.source[i][j] / a;
             }
         });
     }
@@ -103,7 +113,7 @@ public class Matrix4f {
         return new Matrix4f(new Operation(m1.matrix, m2.matrix) {
             @Override
             float operate(int i, int j) {
-                return getSource()[i][j] + getTarget()[i][j];
+                return this.source[i][j] + this.target[i][j];
             }
         });
     }
@@ -116,7 +126,7 @@ public class Matrix4f {
         return new Matrix4f(new Operation(m1.matrix, m2.matrix) {
             @Override
             float operate(int i, int j) {
-                return getSource()[i][j] - getTarget()[i][j];
+                return this.source[i][j] - this.target[i][j];
             }
         });
     }
@@ -129,25 +139,30 @@ public class Matrix4f {
         return new Matrix4f(new Operation(matrix, m.matrix) {
             @Override
             float operate(int i, int j) {
-                return getSource()[i][0] * getTarget()[0][j]
-                        + getSource()[i][1] * getTarget()[1][j]
-                        + getSource()[i][2] * getTarget()[2][j]
-                        + getSource()[i][3] * getTarget()[3][j];
+                return this.source[i][0] * this.target[0][j]
+                        + this.source[i][1] * this.target[1][j]
+                        + this.source[i][2] * this.target[2][j]
+                        + this.source[i][3] * this.target[3][j];
             }
         });
     }
 
-    @Override
-    public String toString() {
-        String result = "";
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                result += " " + matrix[i][j] + " ";
-            }
-            result += "\n";
-        }
-        return result;
+    public Matrix4f negate() {
+        return mul(this, -1);
     }
 
+    // --------------- COMMON ---------------
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                builder.append(" " + matrix[i][j] + " ");
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
+    }
 
 }
