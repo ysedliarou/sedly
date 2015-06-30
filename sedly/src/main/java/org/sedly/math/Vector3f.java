@@ -40,10 +40,6 @@ public class Vector3f {
         this.z = z;
     }
 
-    public Vector3f(Vector3f v) {
-        this(v.x, v.y, v.z);
-    }
-
     // --------------- METHODS ---------------
 
     public static Vector3f add(Vector3f v1, Vector3f v2) {
@@ -119,7 +115,7 @@ public class Vector3f {
     }
 
     public Vector3f duplicate() {
-        return new Vector3f(this);
+        return new Vector3f(x, y, z);
     }
 
     public Vector3f negate() {
@@ -135,8 +131,8 @@ public class Vector3f {
         return new Vector3f(w.getX(), w.getY(), w.getZ());
     }
 
-    public Vector3f lerp(Vector3f dest, float lerpFactor) {
-        return dest.sub(this).mul(lerpFactor).add(this);
+    public Vector3f interpolate(Vector3f destination, float factor) {
+        return destination.sub(this).mul(factor).add(this);
     }
 
     // --------------- COMMON ---------------

@@ -42,14 +42,6 @@ public class Matrix4f {
         this(createGetOperation(matrix));
     }
 
-    public Matrix4f() {
-        this(IDENTITY);
-    }
-
-    public Matrix4f(Matrix4f m) {
-        this(m.matrix);
-    }
-
     private Matrix4f(Operation operation) {
         this.matrix = fill(operation);
     }
@@ -66,7 +58,7 @@ public class Matrix4f {
     }
 
     public float get(int i, int j) {
-        return createGetOperation(this.matrix).operate(i, j);
+        return matrix[i][j];
     }
 
     private static float[][] fill(Operation operation) {
@@ -80,7 +72,7 @@ public class Matrix4f {
     }
 
     public Matrix4f duplicate() {
-        return new Matrix4f(this);
+        return new Matrix4f(matrix);
     }
 
     public static Matrix4f mul(Matrix4f m, final float a) {
