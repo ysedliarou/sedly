@@ -7,13 +7,40 @@ package org.sedly.math;
 
 public class Transformation {
 
+    public static class Builder {
+
+        private Vector3f translation;
+        private Vector3f scale;
+        private Quaternion rotation;
+
+        public Builder setTranslation(Vector3f translation) {
+            this.translation = translation == null ? Vector3f.ZERO : translation;
+            return this;
+        }
+
+        public Builder setScale(Vector3f scale) {
+            this.scale = scale == null ? Vector3f.UNIT : scale;
+            return this;
+        }
+
+        public Builder setRotation(Quaternion rotation) {
+            this.rotation = rotation == null ? Quaternion.UNIT : rotation;
+            return this;
+        }
+
+        public Transformation build() {
+            return new Transformation(this);
+        }
+
+    }
+
     // --------------- PROPERTIES ---------------
 
-    private Vector3f translation = Vector3f.ZERO;
+    private Vector3f translation;
 
-    private Vector3f scale = Vector3f.UNIT;
+    private Vector3f scale;
 
-    private Quaternion rotation = Quaternion.UNIT;
+    private Quaternion rotation;
 
     // --------------- GETTERS ---------------
 
@@ -31,7 +58,21 @@ public class Transformation {
 
     // --------------- CONSTRUCTORS ---------------
 
+    private Transformation() {
+        super();
+    }
+
+    private Transformation(Builder builder) {
+        this.translation = builder.translation;
+        this.scale = builder.scale;
+        this.rotation = builder.rotation;
+    }
+
     // --------------- METHODS ---------------
+
+    public Builder builder() {
+        return new Builder();
+    }
 
     public static Matrix4f translation(Vector3f v) {
         return new Matrix4f(new float[][] {
