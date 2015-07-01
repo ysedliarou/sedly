@@ -58,12 +58,12 @@ public class Vector3f {
         return sub(this, v);
     }
 
-    public static Vector3f mul(Vector3f v, float a) {
+    public static Vector3f mult(Vector3f v, float a) {
         return new Vector3f(v.x * a, v.y * a,v.z * a);
     }
 
-    public Vector3f mul(float a) {
-        return mul(this, a);
+    public Vector3f mult(float a) {
+        return mult(this, a);
     }
 
     public static Vector3f div(Vector3f v, float a) {
@@ -119,7 +119,7 @@ public class Vector3f {
     }
 
     public Vector3f negate() {
-        return mul(this, -1);
+        return mult(this, -1);
     }
 
     public Vector3f rotate(Vector3f axis, float angle) {
@@ -127,12 +127,7 @@ public class Vector3f {
     }
 
     public Vector3f rotate(Quaternion rotation) {
-        Quaternion w = rotation.mul(this).mul(rotation.conjugate());
-        return new Vector3f(w.getX(), w.getY(), w.getZ());
-    }
-
-    public Vector3f interpolate(Vector3f destination, float factor) {
-        return destination.sub(this).mul(factor).add(this);
+        return rotation.mult(this).mult(rotation.conjugate()).getDirection();
     }
 
     // --------------- COMMON ---------------

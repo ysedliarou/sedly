@@ -75,7 +75,7 @@ public class Matrix4f {
         return new Matrix4f(matrix);
     }
 
-    public static Matrix4f mul(Matrix4f m, final float a) {
+    public static Matrix4f mult(Matrix4f m, final float a) {
         return new Matrix4f(new Operation(m.matrix, null) {
             @Override
             float operate(int i, int j) {
@@ -84,8 +84,8 @@ public class Matrix4f {
         });
     }
 
-    public Matrix4f mul(final float a) {
-        return mul(this, a);
+    public Matrix4f mult(final float a) {
+        return mult(this, a);
     }
 
     public static Matrix4f div(Matrix4f m, final float a) {
@@ -127,7 +127,7 @@ public class Matrix4f {
         return sub(this, m);
     }
 
-    public Matrix4f mul(Matrix4f m) {
+    public Matrix4f mult(Matrix4f m) {
         return new Matrix4f(new Operation(matrix, m.matrix) {
             @Override
             float operate(int i, int j) {
@@ -139,8 +139,15 @@ public class Matrix4f {
         });
     }
 
+    public Vector3f mult(Vector3f v) {
+        float x = matrix[0][0] * v.getX() + matrix[0][1] * v.getY() + matrix[0][2] * v.getZ() + matrix[0][3];
+        float y = matrix[1][0] * v.getX() + matrix[1][1] * v.getY() + matrix[1][2] * v.getZ() + matrix[1][3];
+        float z = matrix[2][0] * v.getX() + matrix[2][1] * v.getY() + matrix[2][2] * v.getZ() + matrix[2][3];
+        return new Vector3f(x, y, z);
+    }
+
     public Matrix4f negate() {
-        return mul(this, -1);
+        return mult(this, -1);
     }
 
     // --------------- COMMON ---------------

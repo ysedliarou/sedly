@@ -1,5 +1,10 @@
 package org.sedly.math;
 
+/**
+ * The direction of vector rotation is counterclockwise if angle (in radians) is positive (e.g. 90°),
+ * and clockwise if angle is negative (e.g. −90°).
+ */
+
 public class Transformation {
 
     // --------------- PROPERTIES ---------------
@@ -77,7 +82,15 @@ public class Transformation {
     }
 
     public static Matrix4f rotationXYZ(float alpha, float beta, float gamma) {
-        return rotationZ(alpha).mul(rotationX(beta)).mul(rotationZ(gamma));
+        final float cosX = (float) Math.cos(alpha), sinX = (float) Math.sin(alpha);
+        final float cosY = (float) Math.cos(beta), sinY = (float) Math.sin(beta);
+        final float cosZ = (float) Math.cos(gamma), sinZ = (float) Math.sin(gamma);
+        return new Matrix4f(new float[][] {
+                {cosY * cosZ,                           -cosY * sinZ,                           -sinY,          0},
+                {-sinX * sinY * cosZ + cosX * sinZ,     sinX * sinY * sinZ + cosX * cosZ,       -sinX*cosY,     0},
+                {cosX * sinY * cosZ + sinX * sinZ,      -cosX * sinY * sinZ + sinX * cosZ,      cosX*cosY,      0},
+                {0,                                     0,                                      0,              1}
+        });
     }
 
     public static Matrix4f rotation(Vector3f axis, float angle) {
@@ -90,19 +103,13 @@ public class Transformation {
         });
     }
 
-
     public static Matrix4f rotation(Quaternion q) {
         return new Matrix4f(new float[][] {
-                {1-2*q.getY()*q.getY()-2*q.getZ()*q.getZ(),     2*q.getX()*q.getY()-2*q.getZ()*q.getW(),        2*q.getX()*q.getZ()+2*q.getY()*q.getW(),            0},
-                {2*q.getX()*q.getY()+2*q.getZ()*q.getW(),       1-2*q.getX()*q.getX()-2*q.getZ()*q.getZ(),      2*q.getY()*q.getZ()+2*q.getX()*q.getW(),            0},
-                {2*q.getX()*q.getZ()+2*q.getY()*q.getW(),       2*q.getY()*q.getZ()+2*q.getX()*q.getW(),        1-2*q.getX()*q.getX()-2*q.getY()*q.getY(),          0},
-                {0,                                             0,                                              0,                                                  1}
+                {1-2 * q.getY() * q.getY() - 2 * q.getZ() * q.getZ(),   2 * q.getX() * q.getY() - 2 * q.getZ() * q.getW(),          2 * q.getX() * q.getZ() + 2 * q.getY() * q.getW(),      0},
+                {2 * q.getX() * q.getY() + 2 * q.getZ() * q.getW(),     1 - 2 * q.getX() * q.getX() - 2 * q.getZ() * q.getZ(),      2 * q.getY() * q.getZ() + 2 * q.getX() * q.getW(),      0},
+                {2 * q.getX() * q.getZ() + 2 * q.getY() * q.getW(),     2 * q.getY() * q.getZ() + 2 * q.getX() * q.getW(),          1 - 2 * q.getX() * q.getX() - 2 * q.getY() * q.getY(),  0},
+                {0,                                                     0,                                                          0,                                                      1}
         });
-    }
-
-
-    public static void main(String[] args) {
-        System.out.println(Vector3f.UNIT_Z.rotate(new Quaternion(1,0,0,0)));
     }
 
 }

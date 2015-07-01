@@ -1,5 +1,7 @@
 package org.sedly.math;
 
+import java.text.MessageFormat;
+
 public class Quaternion {
 
     // --------------- CONSTANTS ---------------
@@ -28,6 +30,10 @@ public class Quaternion {
 
     public float getW() {
         return w;
+    }
+
+    public Vector3f getDirection() {
+        return new Vector3f(x, y, z);
     }
 
     // --------------- CONSTRUCTORS ---------------
@@ -72,24 +78,24 @@ public class Quaternion {
         return dot(this, q);
     }
 
-    public Quaternion mul(float r) {
+    public Quaternion mult(float r) {
         return new Quaternion(x * r, y * r, z * r, w * r);
     }
 
-    public static Quaternion mul(Quaternion q1, Quaternion q2) {
-        float w = q1.w * q1.w - q1.x * q2.x - q1.y * q2.y - q1.z * q2.z;
-        float x = q1.x * q1.w + q1.w * q2.x + q1.y * q2.z - q1.z * q2.y;
-        float y = q1.y * q1.w + q1.w * q2.y + q1.z * q2.x - q1.x * q2.z;
-        float z = q1.z * q1.w + q1.w * q2.z + q1.x * q2.y - q1.y * q2.x;
+    public static Quaternion mult(Quaternion q1, Quaternion q2) {
+        float x = q1.x * q2.w + q1.y * q2.z - q1.z * q2.y + q1.w * q2.x;
+        float y = -q1.x * q2.z + q1.y * q2.w + q1.z * q2.x + q1.w * q2.y;
+        float z = q1.x * q2.y - q1.y * q2.x + q1.z * q2.w + q1.w * q2.z;
+        float w = -q1.x * q2.x - q1.y * q2.y - q1.z * q2.z + q1.w * q2.w;
 
         return new Quaternion(x, y, z, w);
     }
 
-    public Quaternion mul(Quaternion q) {
-        return mul(this, q);
+    public Quaternion mult(Quaternion q) {
+        return mult(this, q);
     }
 
-    public static Quaternion mul(Quaternion q, Vector3f v) {
+    public static Quaternion mult(Quaternion q, Vector3f v) {
         float w = -q.x * v.getX() - q.y * v.getY() - q.z * v.getZ();
         float x = q.w * v.getX() + q.y * v.getZ() - q.z * v.getY();
         float y = q.w * v.getY() + q.z * v.getX() - q.x * v.getZ();
@@ -98,8 +104,8 @@ public class Quaternion {
         return new Quaternion(x, y, z, w);
     }
 
-    public Quaternion mul(Vector3f v) {
-        return mul(this, v);
+    public Quaternion mult(Vector3f v) {
+        return mult(this, v);
     }
 
     public static Quaternion sub(Quaternion q1, Quaternion q2) {
@@ -140,6 +146,13 @@ public class Quaternion {
 
     public Vector3f left() {
         return Vector3f.UNIT_X.negate().rotate(this);
+    }
+
+    // --------------- COMMON ---------------
+
+    @Override
+    public String toString() {
+        return MessageFormat.format("Quaternion[x={0},y={1},z={2},w={3}]", x, y, z, w);
     }
 
 }
