@@ -9,9 +9,9 @@ public class Transformation {
 
     public static class Builder {
 
-        private Vector3f translation;
-        private Vector3f scale;
-        private Quaternion rotation;
+        private Vector3f translation = Vector3f.ZERO;
+        private Vector3f scale = Vector3f.UNIT;
+        private Quaternion rotation = Quaternion.UNIT;
 
         public Builder setTranslation(Vector3f translation) {
             this.translation = translation == null ? Vector3f.ZERO : translation;
@@ -26,6 +26,10 @@ public class Transformation {
         public Builder setRotation(Quaternion rotation) {
             this.rotation = rotation == null ? Quaternion.UNIT : rotation;
             return this;
+        }
+
+        private Builder() {
+            super();
         }
 
         public Transformation build() {
@@ -70,7 +74,7 @@ public class Transformation {
 
     // --------------- METHODS ---------------
 
-    public Builder builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
