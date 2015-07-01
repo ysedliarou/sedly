@@ -14,17 +14,23 @@ public class Transformation {
         private Quaternion rotation = Quaternion.UNIT;
 
         public Builder setTranslation(Vector3f translation) {
-            this.translation = translation == null ? Vector3f.ZERO : translation;
+            if (translation != null) {
+                this.translation = translation;
+            }
             return this;
         }
 
         public Builder setScale(Vector3f scale) {
-            this.scale = scale == null ? Vector3f.UNIT : scale;
+            if (scale != null) {
+                this.scale =  scale;
+            }
             return this;
         }
 
         public Builder setRotation(Quaternion rotation) {
-            this.rotation = rotation == null ? Quaternion.UNIT : rotation;
+            if (rotation == null) {
+                this.rotation = rotation;
+            }
             return this;
         }
 
