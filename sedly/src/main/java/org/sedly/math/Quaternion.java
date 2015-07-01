@@ -2,6 +2,12 @@ package org.sedly.math;
 
 public class Quaternion {
 
+    // --------------- CONSTANTS ---------------
+
+    public final static Quaternion ZERO = new Quaternion(0, 0, 0, 0);
+
+    public final static Quaternion UNIT = new Quaternion(0, 0, 0, 1);
+
     // --------------- PROPERTIES ---------------
 
     private float x, y, z, w;
