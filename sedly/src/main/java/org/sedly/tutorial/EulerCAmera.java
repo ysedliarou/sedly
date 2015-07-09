@@ -31,14 +31,14 @@ package org.sedly.tutorial;
  */
 
 
-        import org.lwjgl.input.Keyboard;
-        import org.lwjgl.input.Mouse;
-        import org.lwjgl.opengl.GLContext;
-        import org.lwjgl.util.glu.GLU;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GLContext;
+import org.lwjgl.util.glu.GLU;
 
-        import static java.lang.Math.*;
-        import static org.lwjgl.opengl.ARBDepthClamp.GL_DEPTH_CLAMP;
-        import static org.lwjgl.opengl.GL11.*;
+import static java.lang.Math.*;
+import static org.lwjgl.opengl.ARBDepthClamp.GL_DEPTH_CLAMP;
+import static org.lwjgl.opengl.GL11.*;
 
 /**
  * A camera set in 3D perspective. The camera uses Euler angles internally, so beware of a gimbal lock.
