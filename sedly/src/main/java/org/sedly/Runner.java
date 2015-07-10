@@ -1,23 +1,27 @@
 package org.sedly;
 
 import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.*;
 import org.lwjgl.util.glu.GLU;
+import org.sedly.render.Mesh;
+import org.sedly.render.SimpleMesh;
+import org.sedly.shader.Shader;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import static org.sedly.Config.*;
 
 public class Runner {
 
     private final static int WIDTH = 800;
     private final static int HEIGHT = 800;
 
-    private static void init() throws LWJGLException {
+    private static void initDisplay() throws LWJGLException {
         Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
         Display.setVSyncEnabled(true);
         Display.create();
-
-        Keyboard.create();
-        Mouse.create();
 
         initGraphics();
     }
@@ -41,26 +45,39 @@ public class Runner {
         return !Display.isCloseRequested();
     }
 
-    private static void loop() {
+    private static void loop() throws IOException {
+        GL11.glTranslatef(0, 0, -10);
+
+        Mesh mesh = new SimpleMesh(VERTICES, INDICES);
+
+        Shader shader = new Shader();
+        shader.addFragmentShader(new String(Files.readAllBytes(Paths.get(Config.FRAGMENT_SHADER))));
+//        shader.addVertexShader(new String(Files.readAllBytes(Paths.get(Config.VERTEX_SHADER))));
+        shader.compile();
+
+
+        float angle = 45f;
         while (isRunning()) {
+            GL11.glPushMatrix();
+                GL11.glRotatef(angle, 1, 1, 1);
 
-            Input.update();
+                shader.bind();
+                mesh.draw();
 
-            System.out.println(Input.getKey(Keyboard.KEY_SPACE));
-
+            GL11.glPopMatrix();
+            angle += 0.1f;
             updateDisplay();
         }
-    }
 
+        mesh.clear();
+    }
 
     private static void cleanUp() {
         Display.destroy();
-        Keyboard.destroy();
-        Mouse.destroy();
     }
 
-    public static void main(String[] args) throws LWJGLException {
-        init();
+    public static void main(String[] args) throws LWJGLException, IOException {
+        initDisplay();
         loop();
         cleanUp();
     }

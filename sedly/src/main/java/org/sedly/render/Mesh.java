@@ -1,17 +1,9 @@
 package org.sedly.render;
 
-import java.util.List;
+public interface Mesh {
 
-public abstract class Mesh {
+    void draw();
 
-    private List<Vertex> vertices;
-
-    public List<Vertex> getVertices() {
-        return vertices;
-    }
-
-    protected Mesh(List<Vertex> vertices) {
-        this.vertices = vertices;
-    }
+    void clear();
 
 }
