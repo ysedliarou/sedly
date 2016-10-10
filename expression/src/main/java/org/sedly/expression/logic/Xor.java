@@ -6,30 +6,29 @@ import org.sedly.expression.name.DefaultExpressionType;
 import org.sedly.expression.name.ExpressionType;
 
 
-public class And extends TwoOperandsExpression<Boolean, Boolean> {
+public class Xor extends TwoOperandsExpression<Boolean, Boolean> {
 
-    public And(Expression<Boolean> firstExpression, Expression<Boolean> secondExpression) {
+    public Xor(Expression<Boolean> firstExpression, Expression<Boolean> secondExpression) {
         super(firstExpression, secondExpression);
     }
 
-    public And(Boolean firstValue, Boolean secondValue) {
+    public Xor(Boolean firstValue, Boolean secondValue) {
         super(firstValue, secondValue);
     }
 
     @Override
     public Boolean evaluate() {
-        return evaluateFirstValue() && evaluateSecondValue();
+        return evaluateFirstValue() ^ evaluateSecondValue();
     }
 
 
     @Override
     public ExpressionType getType() {
-        return DefaultExpressionType.AND;
+        return DefaultExpressionType.XOR;
     }
 
     @Override
     public String toString() {
         return getFirstOperand() + getType().getName() + getSecondOperand();
     }
-
 }

@@ -13,6 +13,11 @@ public abstract class TwoOperandsExpression<R, V> extends OneOperandExpression<R
         this.secondOperand = secondOperand;
     }
 
+    protected TwoOperandsExpression(V firstOperand, V secondOperand) {
+        super(firstOperand);
+        this.secondOperand = new Value<>(secondOperand);
+    }
+
     protected V evaluateSecondValue() {
         return getSecondOperand().evaluate();
     }

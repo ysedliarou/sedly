@@ -1,4 +1,4 @@
-package org.sedly.expression.logic;
+package org.sedly.expression.function.math;
 
 import org.sedly.expression.Expression;
 import org.sedly.expression.name.DefaultExpressionType;
@@ -6,28 +6,27 @@ import org.sedly.expression.OneOperandExpression;
 import org.sedly.expression.name.ExpressionType;
 
 
-public class Not extends OneOperandExpression<Boolean, Boolean> {
-
-    public Not(Expression<Boolean> expression) {
+public class Abs extends OneOperandExpression<Double, Double> {
+    public Abs(Expression<Double> expression) {
         super(expression);
     }
 
-    public Not(Boolean value) {
+    public Abs(Double value) {
         super(value);
     }
 
     @Override
-    public Boolean evaluate() {
-        return !evaluateFirstValue();
+    public Double evaluate() {
+        return Math.abs(getFirstOperand().evaluate());
     }
 
     @Override
     public ExpressionType getType() {
-        return DefaultExpressionType.NOT;
+        return DefaultExpressionType.ABS;
     }
 
     @Override
     public String toString() {
-        return getType().getName() + getFirstOperand();
+        return getType().getName() + "(" + getFirstOperand() + ")";
     }
 }
