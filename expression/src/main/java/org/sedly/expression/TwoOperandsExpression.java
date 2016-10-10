@@ -17,7 +17,4 @@ public abstract class TwoOperandsExpression<R, V> extends OneOperandExpression<R
         return getSecondOperand().evaluate();
     }
 
-    @Override
-    public abstract R evaluate();
-
 }
