@@ -1,8 +1,8 @@
-import org.sedly.expression.Expression;
-import org.sedly.expression.Value;
-import org.sedly.expression.arithmetic.Multiply;
-import org.sedly.expression.arithmetic.Plus;
-import org.sedly.expression.function.math.Cos;
+import org.sedly.expression.ast.Expression;
+import org.sedly.expression.ast.Value;
+import org.sedly.expression.ast.math.arithmetic.Multiply;
+import org.sedly.expression.ast.math.arithmetic.Plus;
+import org.sedly.expression.ast.math.math.Cos;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 public class Runner {
