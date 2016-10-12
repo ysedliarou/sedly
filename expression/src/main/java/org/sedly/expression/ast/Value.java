@@ -1,7 +1,5 @@
 package org.sedly.expression.ast;
 
-import org.sedly.expression.lexer.token.TokenType;
-
 public class Value<R> implements Expression<R> {
 
     private R value;
@@ -19,13 +17,8 @@ public class Value<R> implements Expression<R> {
     }
 
     @Override
-    public R evaluate() {
+    public R evaluate(EvaluationContext context) {
         return getValue();
-    }
-
-    @Override
-    public TokenType getType() {
-        return Value.this::toString;
     }
 
     @Override

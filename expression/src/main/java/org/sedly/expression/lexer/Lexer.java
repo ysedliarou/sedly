@@ -7,6 +7,6 @@ import org.sedly.expression.lexer.token.Token;
 
 public interface Lexer {
 
-    Deque<Token> tokenize();
+    Deque<Token> lex();
 
 }

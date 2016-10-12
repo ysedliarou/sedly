@@ -1,8 +1,5 @@
 package org.sedly.expression.ast;
 
-import org.sedly.expression.ast.Expression;
-import org.sedly.expression.ast.Value;
-
 
 public abstract class OneOperandExpression<R, V> implements Expression<R> {
 
@@ -20,8 +17,8 @@ public abstract class OneOperandExpression<R, V> implements Expression<R> {
         this.firstOperand = new Value<>(value);
     }
 
-    protected V evaluateFirstValue() {
-        return getFirstOperand().evaluate();
+    protected V evaluateFirstValue(EvaluationContext context) {
+        return getFirstOperand().evaluate(context);
     }
 
 }

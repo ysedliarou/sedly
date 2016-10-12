@@ -1,5 +1,6 @@
 import org.sedly.expression.ast.Expression;
 import org.sedly.expression.ast.Value;
+import org.sedly.expression.ast.Variable;
 import org.sedly.expression.ast.math.arithmetic.Multiply;
 import org.sedly.expression.ast.math.arithmetic.Plus;
 import org.sedly.expression.ast.math.math.Cos;
@@ -14,13 +15,16 @@ public class Runner {
 
         System.out.println(res);
 
-        Expression<Double> plus = new Plus(1.0, 1.0);
+        Expression<Double> var = new Variable<>("x");
+
+        Expression<Double> plus = new Plus(new Value<>(1.0), new Value<>(1.0));
 
         Expression<Double> multiply = new Multiply(new Value<>(4d), plus);
-        System.out.println(multiply.toString());
 
         Expression<Double> cos = new Cos(multiply);
-        System.out.println(cos.toString() + " = " + cos.evaluate());
+
+        System.out.println("res = " + cos.evaluate(null));
+
 
     }
 }

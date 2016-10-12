@@ -1,10 +1,8 @@
 package org.sedly.expression.ast.math.logic;
 
+import org.sedly.expression.ast.EvaluationContext;
 import org.sedly.expression.ast.Expression;
 import org.sedly.expression.ast.OneOperandExpression;
-import org.sedly.expression.lexer.token.impl.LogicTokenType;
-import org.sedly.expression.lexer.token.TokenType;
-
 
 public class Not extends OneOperandExpression<Boolean, Boolean> {
 
@@ -17,17 +15,8 @@ public class Not extends OneOperandExpression<Boolean, Boolean> {
     }
 
     @Override
-    public Boolean evaluate() {
-        return !evaluateFirstValue();
+    public Boolean evaluate(EvaluationContext context) {
+        return !evaluateFirstValue(context);
     }
 
-    @Override
-    public TokenType getType() {
-        return LogicTokenType.NOT;
-    }
-
-    @Override
-    public String toString() {
-        return getType().getName() + getFirstOperand();
-    }
 }

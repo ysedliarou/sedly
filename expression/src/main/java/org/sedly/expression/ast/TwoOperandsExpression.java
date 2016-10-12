@@ -19,8 +19,8 @@ public abstract class TwoOperandsExpression<R, V> extends OneOperandExpression<R
         this.secondOperand = new Value<>(secondOperand);
     }
 
-    protected V evaluateSecondValue() {
-        return getSecondOperand().evaluate();
+    protected V evaluateSecondValue(EvaluationContext context) {
+        return getSecondOperand().evaluate(context);
     }
 
 }

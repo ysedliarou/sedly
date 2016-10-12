@@ -1,10 +1,8 @@
 package org.sedly.expression.ast.math.logic;
 
+import org.sedly.expression.ast.EvaluationContext;
 import org.sedly.expression.ast.Expression;
 import org.sedly.expression.ast.TwoOperandsExpression;
-import org.sedly.expression.lexer.token.impl.LogicTokenType;
-import org.sedly.expression.lexer.token.TokenType;
-
 
 public class Xor extends TwoOperandsExpression<Boolean, Boolean> {
 
@@ -17,18 +15,8 @@ public class Xor extends TwoOperandsExpression<Boolean, Boolean> {
     }
 
     @Override
-    public Boolean evaluate() {
-        return evaluateFirstValue() ^ evaluateSecondValue();
+    public Boolean evaluate(EvaluationContext context) {
+        return evaluateFirstValue(context) ^ evaluateSecondValue(context);
     }
 
-
-    @Override
-    public TokenType getType() {
-        return LogicTokenType.XOR;
-    }
-
-    @Override
-    public String toString() {
-        return getFirstOperand() + getType().getName() + getSecondOperand();
-    }
 }
