@@ -75,7 +75,7 @@ public class Vector3f {
     }
 
     public float lengthSquared() {
-        return x * x + y * y;
+        return x * x + y * y + z * z;
     }
 
     public float length() {
