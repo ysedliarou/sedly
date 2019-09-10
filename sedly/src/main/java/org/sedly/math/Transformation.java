@@ -28,7 +28,7 @@ public class Transformation {
         }
 
         public Builder setRotation(Quaternion rotation) {
-            if (rotation == null) {
+            if (rotation != null) {
                 this.rotation = rotation;
             }
             return this;
