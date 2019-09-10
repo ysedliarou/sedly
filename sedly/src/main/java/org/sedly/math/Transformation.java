@@ -147,19 +147,19 @@ public class Transformation {
     public static Matrix4f rotation(Vector3f axis, float angle) {
         final float cos = (float) Math.cos(angle), sin = (float) Math.sin(angle);
         return new Matrix4f(new float[][] {
-                {cos + (1-cos) * axis.getX() * axis.getX(),                 (1 - cos) * axis.getX() * axis.getY() - sin * axis.getZ(),  (1-cos) * axis.getX() * axis.getY() + sin * axis.getY(),    0},
-                {(1-cos) * axis.getY() * axis.getX() + sin * axis.getZ(),   cos + (1-cos) * axis.getY() * axis.getY(),                  (1-cos) * axis.getY() * axis.getZ() + sin * axis.getX(),    0},
-                {(1-cos) * axis.getX() * axis.getZ() - sin * axis.getY(),   (1-cos) * axis.getZ() * axis.getY() + sin * axis.getX(),    cos + (1-cos) * axis.getZ() * axis.getZ(),                  0},
-                {0,                                                         0,                                                          0,                                                          1}
+                {cos + (1 - cos) * axis.getX() * axis.getX(),                 (1 - cos) * axis.getX() * axis.getY() - sin * axis.getZ(),    (1 - cos) * axis.getX() * axis.getY() + sin * axis.getY(),    0},
+                {(1 - cos) * axis.getY() * axis.getX() + sin * axis.getZ(),   cos + (1 - cos) * axis.getY() * axis.getY(),                  (1 - cos) * axis.getY() * axis.getZ() + sin * axis.getX(),    0},
+                {(1 - cos) * axis.getX() * axis.getZ() - sin * axis.getY(),   (1 - cos) * axis.getZ() * axis.getY() + sin * axis.getX(),    cos + (1 - cos) * axis.getZ() * axis.getZ(),                  0},
+                {0,                                                           0,                                                            0,                                                            1}
         });
     }
 
     public static Matrix4f rotation(Quaternion q) {
         return new Matrix4f(new float[][] {
-                {1-2 * q.getY() * q.getY() - 2 * q.getZ() * q.getZ(),   2 * q.getX() * q.getY() - 2 * q.getZ() * q.getW(),          2 * q.getX() * q.getZ() + 2 * q.getY() * q.getW(),          0},
-                {2 * q.getX() * q.getY() + 2 * q.getZ() * q.getW(),     1 - 2 * q.getX() * q.getX() - 2 * q.getZ() * q.getZ(),      2 * q.getY() * q.getZ() + 2 * q.getX() * q.getW(),          0},
-                {2 * q.getX() * q.getZ() + 2 * q.getY() * q.getW(),     2 * q.getY() * q.getZ() + 2 * q.getX() * q.getW(),          1 - 2 * q.getX() * q.getX() - 2 * q.getY() * q.getY(),      0},
-                {0,                                                     0,                                                          0,                                                          1}
+                {1 - 2 * q.getY() * q.getY() - 2 * q.getZ() * q.getZ(),   2 * q.getX() * q.getY() - 2 * q.getZ() * q.getW(),          2 * q.getX() * q.getZ() + 2 * q.getY() * q.getW(),          0},
+                {2 * q.getX() * q.getY() + 2 * q.getZ() * q.getW(),       1 - 2 * q.getX() * q.getX() - 2 * q.getZ() * q.getZ(),      2 * q.getY() * q.getZ() + 2 * q.getX() * q.getW(),          0},
+                {2 * q.getX() * q.getZ() + 2 * q.getY() * q.getW(),       2 * q.getY() * q.getZ() + 2 * q.getX() * q.getW(),          1 - 2 * q.getX() * q.getX() - 2 * q.getY() * q.getY(),      0},
+                {0,                                                       0,                                                          0,                                                          1}
         });
     }
 
