@@ -6,8 +6,6 @@ public class Quaternion {
 
     // --------------- CONSTANTS ---------------
 
-    public final static Quaternion ZERO = new Quaternion(0, 0, 0, 0);
-
     public final static Quaternion UNIT = new Quaternion(0, 0, 0, 1);
 
     // --------------- PROPERTIES ---------------
@@ -38,7 +36,7 @@ public class Quaternion {
 
     // --------------- CONSTRUCTORS ---------------
 
-    public Quaternion(float x, float y, float z, float w) {
+    private Quaternion(float x, float y, float z, float w) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -46,12 +44,13 @@ public class Quaternion {
     }
 
     public Quaternion(Vector3f axis, float angle) {
+        Vector3f normal = axis.normalize();
         float sinHalfAngle = (float) Math.sin(angle / 2);
         float cosHalfAngle = (float) Math.cos(angle / 2);
 
-        this.x = axis.getX() * sinHalfAngle;
-        this.y = axis.getY() * sinHalfAngle;
-        this.z = axis.getZ() * sinHalfAngle;
+        this.x = normal.getX() * sinHalfAngle;
+        this.y = normal.getY() * sinHalfAngle;
+        this.z = normal.getZ() * sinHalfAngle;
         this.w = cosHalfAngle;
     }
 
